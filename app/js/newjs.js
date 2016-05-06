@@ -111,6 +111,7 @@ var step1 = {
     function utilFunc(position){
       step1.myLocation.lat = position.coords.latitude; 
       step1.myLocation.lon = position.coords.longitude;
+      alert(step1.myLocation.lat + " " + step1.myLocation.lon);
       console.log(step1.myLocation);
     }
   }
@@ -178,21 +179,28 @@ var step3 = {
     if(d == null){
       d = step3.tempData;
     }
-    var container = $("#poiContainer");
+    var container = $("#poiContainer table");
 
     for(i = 0; i < d.length; i++){
-      var div = $('<div></div>');
+      var div = $('<tr></tr>');
       var st = "";
-      st+= '<label><input type="checkbox" value="' + i + '">';
-      st+= d[i].title + '</label>'
-      var st2 = "<i> rating: " + d[i].yapq_grade + "</i>";
+      st+= '<td><label><input type="checkbox" value="' + i + '" checked></td><td>';
+      st+= d[i].title + '</label></td>'
+      var st2 = "<td>" + d[i].yapq_grade + "</td>";
+      var st3 = '<td><button id = "pic' + i + '" class="btn btn-sm btn-info">show</button></td>';
       var e = $(st);
       var e2 = $(st2);
+      var e3 = $(st3);
       div.append(e);
       div.append(e2);
+      div.append(e3);
       container.append(div);
     }
     
+  },
+  getPhotoUrl: function(){
+
+
   }
 };
 

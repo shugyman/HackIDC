@@ -1,3 +1,4 @@
+
 #loc{
 	color: green; 
 	display:none;
@@ -38,3 +39,10 @@
         text-align: center;
       }
 
+#poiContainer input{
+	cursor: pointer;
+}
+#pic img {
+	width: 40%;
+	height: 40%;
+}
