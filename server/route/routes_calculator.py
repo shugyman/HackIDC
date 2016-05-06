@@ -3,6 +3,7 @@ from itertools import permutations
 
 from route import Route
 from poi.cache import POICache
+from google_api import get_route
 
 
 def calculate_routes(lat, lon, pois, max_dist):
@@ -14,7 +15,7 @@ def calculate_routes(lat, lon, pois, max_dist):
     possible_routes = get_possible_routes(lat, lon, poi_objects, max_dist)
 
     # Get the routes as a google route.
-    google_routes = get_google_routes(possible_routes)
+    google_routes = get_google_routes(lat, lon, possible_routes)
 
     # Final filter the google routes.
     final_routes = []
@@ -49,6 +50,7 @@ def get_possible_routes(lat, lon, pois, max_dist):
 
 
 def get_google_routes(possible_routes):
+    for possible_routes in
     return possible_routes
 
 
