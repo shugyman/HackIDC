@@ -18,7 +18,7 @@ var step2 = {
   distance: {
     min: null,
     max: null
-  }
+  },
   location: {
     log: null,
     lat: null
@@ -26,14 +26,14 @@ var step2 = {
   init: function(log, lat){
     this.location.log = log;
     this.location.lat = lat;
-  }
+  },
 
   getData: function(){
     var temp = rangeSlider.getData();
     this.distance.min = temp[0];
     this.distance.max = temp[1];
     return (this.distance.min > 0 && this.distance.max > 0);
-  }
+  },
 
   launch: function(){
     if(step2.getData()){
@@ -90,7 +90,7 @@ var rangeSlider = {
     rangeSlider.s = $("#trackLength").slider({});
   },
   getData: function(){
-    var value = rangeSlider.s.slider('getValue')
+    var value = rangeSlider.s.slider('getValue');
     return value;
   }
 }
