@@ -1,11 +1,12 @@
 from poi import POI
+from keys import AMADEUS_KEY
 import requests
 
 def get_pois(latitude, longitude, rad):
     pois_lst = []
     yapq_url = "https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle"
     payload = {
-    "apikey": "hZGFYuvJygHIZ0c61Bv5HWxjwqmyKzoI",
+    "apikey": AMADEUS_KEY,
     "latitude": latitude,
     "longitude": longitude,
     "radius": rad,
