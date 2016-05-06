@@ -45,7 +45,7 @@ class TornadoServer(object):
         return folder
 
     def start_server(self):
-        port = 80
+        port = 8080
         self._server.listen(port)
         print '>>> Tornado Server started on port : {port} <<<'.format(port=port)
         IOLoop.instance().start()
