@@ -21,7 +21,7 @@ def get_poi():
 def get_routes():
     lon = request.args.get("lon")
     lat = request.args.get("lat")
-    pois = request.args.get("pois")
+    pois = json.loads(request.args.get("pois"))
     distance = request.args.get("distance")
     return json.dumps([route.__dict__ for route in calculate_routes(lon, lat, pois, distance)])
 
