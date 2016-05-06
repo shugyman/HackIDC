@@ -12,6 +12,7 @@ var app = {
       $("#sec02but01").on('click', step2.launch);
       $("#googleMap").hide();
       $("#floating-panel").hide();
+      $("#sec02address h2").hide();
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
       $("#sec01but02").toggleClass("btn-info");
@@ -19,10 +20,13 @@ var app = {
     });
       $("#sec01but01").click(function(){
       $("#floating-panel").hide();
+      $("#sec02address h2").hide();
+      step1.getMyLocation();
       step1.createMap();
     });
       $("#sec01but02").click(function(){
       $("#floating-panel").show();
+      $("#sec02address h2").show();
     });
 
     $('#getStarted').on('click', function(){
@@ -35,11 +39,11 @@ var app = {
 
 var step1 = {
   myLocation: {
-    log: null,
+    lng: null,
     lat: null
   },
   otherLocation: {
-    log: null,
+    lng: null,
     lat: null
   },
   isLocationAvailable: false,
@@ -50,10 +54,8 @@ var step1 = {
 
   },
   tryToGetLocation: function(){
-    var temp = step1.getMyLocation();
-    // TODO
-    //return true if successful
-    //update log and lat
+    var found = step1.getMyLocation();
+    return found;
   },
   otherLocationClicked: function(){
     
@@ -61,13 +63,13 @@ var step1 = {
   createMap: function(){
     function initialize() {
       var mapProp = {
-        center:new google.maps.LatLng(step1.myLocation.log, step1.myLocation.lat),
+        center:new google.maps.LatLng(step1.myLocation.lng, step1.myLocation.lat),
         zoom:5,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
       var marker=new google.maps.Marker({
-        position:new google.maps.LatLng(step1.myLocation.log, step1.myLocation.lat),
+        position:new google.maps.LatLng(step1.myLocation.lng, step1.myLocation.lat),
         });
 
         marker.setMap(map);
@@ -84,6 +86,8 @@ var step1 = {
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
+            step1.otherLocation.lat = results[0].geometry.location.lat();
+            step1.otherLocation.lng = results[0].geometry.location.lng();
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
