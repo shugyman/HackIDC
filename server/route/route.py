@@ -18,7 +18,7 @@ class Route(object):
     def __init__(self, route_id=None, route_json=None, pois=None):
         self.route_id = route_id
         self.pois = pois
-        self.legs = [Leg(leg_json) for leg_json in route_json[0].get('legs')]
+        self.legs = [Leg(leg_json) for leg_json in route_json.get('legs')]
 
     def get_metadata(self):
         return {"length": self.length_km, "pois": [poi.__dict__ for poi in self.pois]}
