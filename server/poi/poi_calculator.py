@@ -16,7 +16,9 @@ def get_pois(latitude, longitude, rad):
     r = requests.get(yapq_url, params=payload)
     if r.status_code == 200:
         for poi in r.json().get('points_of_interest'):
-            pois_lst.append(POI(**parse_poi_dict(poi)))
+            poi_obj = POI(**parse_poi_dict(poi))
+            POICache().cache[poi_obj.geoname_id] = poi_obj
+            pois_lst.append(poi_obj)
     else:
         return None
 
