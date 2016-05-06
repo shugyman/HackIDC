@@ -1,13 +1,22 @@
 $(document).ready(function(){
-$("#sec01but01").click(function(){
-   $("#sec01but02").toggleClass("btn-info");
-   $("#sec01but01").toggleClass("btn-info");
+  app.init();
 });
 
-$("#sec01but02").click(function(){
-   $("#sec01but02").toggleClass("btn-info");
-   $("#sec01but01").toggleClass("btn-info");
-});
+
+var app = {
+  init: function(){
+    $("#sec02but01").on('click', step2.launch);
+    
+    $("#step1 button").click(function(){
+      $("#sec01but02").toggleClass("btn-info");
+      $("#sec01but01").toggleClass("btn-info");
+    });
+
+    $('#getStarted').on('click', function(){
+      step1.init();
+    });
+  }
+}
 
 
 var step1 = {
@@ -15,7 +24,23 @@ var step1 = {
     log: null,
     lat: null
   },
+  otherLocation: {
+    log: null,
+    lat: null
+  }
+  isLocationAvailable: false,
+
   init: function(){
+    console.log('step1 inititialized');
+    step1.isLocationAvailable = step1.tryToGetLocation();
+
+  },
+  tryToGetLocation: function(){
+    // TODO
+    //return true if successful
+    //update log and lat
+  },
+  otherLocationClicked: function(){
     
   }
 }
@@ -33,31 +58,29 @@ var step2 = {
     this.location.log = log;
     this.location.lat = lat;
   },
-
   getData: function(){
     var temp = rangeSlider.getData();
     this.distance.min = temp[0];
     this.distance.max = temp[1];
     return (this.distance.min > 0 && this.distance.max > 0);
   },
-
   launch: function(){
     if(step2.getData()){
       step3.init();
     } else {
       console.log("error in step2");
+      console.log(step2);
     }
-  }
+  },
 }
 
 var step3 = {
   init: function(){
 
   }
-}
+};
 
 
-});
 
 var x = document.getElementById("error");
   function getLocation() {
