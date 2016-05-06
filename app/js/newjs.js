@@ -90,7 +90,7 @@ var rangeSlider = {
     rangeSlider.s = $("#trackLength").slider({});
   },
   getData: function(){
-    var value = rangeSlider.s.slider('getValue')
+    var value = rangeSlider.s.slider('getValue');
     return value;
   }
 }
