@@ -3,7 +3,7 @@
 
 var x = document.getElementById("loc");
   function getLocation() {
-    $("#button").click(function(){
+    $("#button1").click(function(){
     $("#loc").show();
    });
     if (navigator.geolocation) {
@@ -18,6 +18,13 @@ var x = document.getElementById("loc");
     x.innerHTML = "Latitude: " + lat + 
     "<br>Longitude: " + lon; 
 }
+  function getDistance() {
+    $("#button2").click(function(){
+    $("#loc2").show();
+    var x = rangeSlider.getData();
+    $("#test").text("selected : " + x);
+   });
+  }
 
 
 
