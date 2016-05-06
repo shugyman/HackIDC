@@ -1,19 +1,17 @@
 from poi import POI
-from cache import POICache
-
+from keys import AMADEUS_KEY
 import requests
-
 
 def get_pois(latitude, longitude, rad):
     pois_lst = []
     yapq_url = "https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-circle"
     payload = {
-        "apikey": "hZGFYuvJygHIZ0c61Bv5HWxjwqmyKzoI",
-        "latitude": latitude,
-        "longitude": longitude,
-        "radius": rad,
-        "category": "landmark",
-        "number_of_images": 0,
+    "apikey": AMADEUS_KEY,
+    "latitude": latitude,
+    "longitude": longitude,
+    "radius": rad,
+    "category": "landmark",
+    "number_of_images": 0,
     }
     r = requests.get(yapq_url, params=payload)
     if r.status_code == 200:
@@ -25,7 +23,6 @@ def get_pois(latitude, longitude, rad):
         return None
 
     return pois_lst
-
 
 def parse_poi_dict(poi):
     geoname_id = poi.get('geoname_id', "N/A")
