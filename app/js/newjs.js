@@ -13,6 +13,7 @@ var x = document.getElementById("error");
   function showPosition(position) {
     var lat = position.coords.latitude; 
     var lon = position.coords.longitude;
+    console.log(lat + " " + lon);
 }
   function getDistance() {
     $("#loc2").show();
