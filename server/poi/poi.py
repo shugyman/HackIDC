@@ -1,8 +1,6 @@
 class POI:
-    def __init__(self):
-        self.rank = 1
-        self.name = 2
-        self.lon = 34.13
-        self.lat = 35.12
-
-
+    def __init__(self, title=None, lon=None, lat=None, yapq_grade=None):
+        self.title = title
+        self.lon = lon
+        self.lat = lat
+        self.yapq_grade = yapq_grade
