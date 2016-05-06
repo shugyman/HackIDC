@@ -1,5 +1,5 @@
-class Route():
-    length = property(lambda self: sum(int(leg.distance.get('value') for leg in self.legs))
+class Route(object):
+    length = property(lambda self: sum(int(leg.distance.get('value') for leg in self.legs)))
     length_km = property(lambda self: self.length / 1000.00)
     st_location = property(lambda self: self.legs[0].start_location)
     end_location = property(lambda self: self.legs[-1].end_location)
