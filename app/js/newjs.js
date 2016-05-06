@@ -1,19 +1,8 @@
 $(document).ready(function(){
   app.init();  
+  //TEMPORARY:
+  step3.init();
 });
-
-function getLocation() {
-  console.log("2"); 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-  function showPosition(position) { 
-   console.log(position.coords.latitude);     
-}   
-
 
 
 
@@ -30,10 +19,7 @@ var app = {
     $('#getStarted').on('click', function(){
       step1.init();
     });
-    getLocation();
-    var x = 2;
-    var y = 3;
-    step1.createMap(x,y);
+    step1.createMap();
   }
 }
 
@@ -135,6 +121,7 @@ var step3 = {
   init: function(){
     if(true){ // FOR DEMO PURPOSES
       console.log(this.tempData);
+      step3.createStep();
       return ;
     }
     var xhttp = new XMLHttpRequest();
@@ -143,15 +130,44 @@ var step3 = {
      step3.data = xhttp.responseText;
      console.log(step3.data);
     }
+    step3.createStep();
   };
+
+  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5
+  var url = "<<<PORT>>>/GetPOI?lat=" + lat + "&lon=" + lon + "&rad=" + rad;
   xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
   xhttp.send();
   },
 
   createStep: function(){
+    var d = step3.data;
+    if(d == null){
+      d = step3.tempData;
+    }
+    var container = $("#poiContainer");
 
+    for(i = 0; i < d.length; i++){
+      var div = $('<div></div>');
+      var st = "";
+      st+= '<label><input type="checkbox" value="' + i + '">';
+      st+= d[i].title + '</label>'
+      var st2 = "<i> rating: " + d[i].yapq_grade + "</i>";
+      var e = $(st);
+      var e2 = $(st2);
+      div.append(e);
+      div.append(e2);
+      container.append(div);
+    }
+    
   }
 };
+
+step4 = {
+  // ARRAY of ids of pois
+  init: function(arr){
+
+  }
+}
 
   function getDistance() {
     $("#loc2").show();
