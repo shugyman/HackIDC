@@ -1,8 +1,14 @@
 $(document).ready(function(){
-$(".btn-default").click(function(){
+$("#sec01but01").click(function(){
    $("#sec01but02").toggleClass("btn-info");
    $("#sec01but01").toggleClass("btn-info");
 });
+
+$("#sec01but02").click(function(){
+   $("#sec01but02").toggleClass("btn-info");
+   $("#sec01but01").toggleClass("btn-info");
+});
+
 
 var step1 = {
   myLocation: {
