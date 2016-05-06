@@ -1,21 +1,46 @@
 $(document).ready(function(){
-$(".btn-default").click(function(){
-   $("#sec01but02").toggleClass("btn-info");
-   $("#sec01but01").toggleClass("btn-info");
+  app.init();
 });
+
 
 var app = {
   init: function(){
     $("#sec02but01").on('click', step2.launch);
+    
+    $("#step1 button").click(function(){
+      $("#sec01but02").toggleClass("btn-info");
+      $("#sec01but01").toggleClass("btn-info");
+    });
+
+    $('#getStarted').on('click', function(){
+      step1.init();
+    });
   }
 }
+
 
 var step1 = {
   myLocation: {
     log: null,
     lat: null
   },
+  otherLocation: {
+    log: null,
+    lat: null
+  }
+  isLocationAvailable: false,
+
   init: function(){
+    console.log('step1 inititialized');
+    step1.isLocationAvailable = step1.tryToGetLocation();
+
+  },
+  tryToGetLocation: function(){
+    // TODO
+    //return true if successful
+    //update log and lat
+  },
+  otherLocationClicked: function(){
     
   }
 }
@@ -53,10 +78,9 @@ var step3 = {
   init: function(){
 
   }
-}
+};
 
 
-});
 
 var x = document.getElementById("error");
   function getLocation() {
