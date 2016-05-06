@@ -1,3 +1,5 @@
+from leg import Leg
+
 class Route(object):
     length = property(lambda self: sum(int(leg.distance.get('value') for leg in self.legs)))
     length_km = property(lambda self: self.length / 1000.00)
