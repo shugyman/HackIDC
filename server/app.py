@@ -16,15 +16,15 @@ def get_poi():
     lon = request.args.get("lon")
     lat = request.args.get("lat")
     rad = request.args.get("rad")
-    return json.dumps([poi.__dict__ for poi in get_pois(lon, lat, rad)])
+    return json.dumps([poi.__dict__ for poi in get_pois(lat, lon, rad)])
 
 @app.route('/GetRoutes')
 def get_routes():
-    lon = request.args.get("lon")
-    lat = request.args.get("lat")
+    lon = float(request.args.get("lon"))
+    lat = float(request.args.get("lat"))
     pois = json.loads(request.args.get("pois"))
-    distance = request.args.get("distance")
-    return json.dumps([route.__dict__ for route in calculate_routes(lon, lat, pois, distance)])
+    distance = float(request.args.get("distance"))
+    return json.dumps([route.__dict__ for route in calculate_routes(lat, lon, pois, distance)])
 
 
 @app.route('/GetRoute')
