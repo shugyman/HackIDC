@@ -4,6 +4,12 @@ $(".btn-default").click(function(){
    $("#sec01but01").toggleClass("btn-info");
 });
 
+var app = {
+  init: function(){
+    $("#sec02but01").on('click', step2.launch);
+  }
+}
+
 var step1 = {
   myLocation: {
     log: null,
@@ -27,21 +33,20 @@ var step2 = {
     this.location.log = log;
     this.location.lat = lat;
   },
-
   getData: function(){
     var temp = rangeSlider.getData();
     this.distance.min = temp[0];
     this.distance.max = temp[1];
     return (this.distance.min > 0 && this.distance.max > 0);
   },
-
   launch: function(){
     if(step2.getData()){
       step3.init();
     } else {
       console.log("error in step2");
+      console.log(step2);
     }
-  }
+  },
 }
 
 var step3 = {
