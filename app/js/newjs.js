@@ -4,12 +4,7 @@ $(document).ready(function(){
   step3.init();
 });
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 7d77103d0eb7699fc2d4a92b9dff4f3eb7ef618c
 
 
 var app = {
@@ -33,10 +28,7 @@ var app = {
     $('#getStarted').on('click', function(){
       step1.init();
     });
-<<<<<<< HEAD
-    
-=======
->>>>>>> 7d77103d0eb7699fc2d4a92b9dff4f3eb7ef618c
+
     step1.createMap();
   }
 }
