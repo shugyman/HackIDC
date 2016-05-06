@@ -15,7 +15,8 @@ def hello_world():
 def get_poi():
     lon = request.args.get("lon")
     lat = request.args.get("lat")
-    return json.dumps([poi.__dict__ for poi in get_pois(lon, lat)])
+    rad = request.args.get("rad")
+    return json.dumps([poi.__dict__ for poi in get_pois(lon, lat, rad)])
 
 @app.route('/GetRoutes')
 def get_routes():
