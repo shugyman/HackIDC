@@ -1,13 +1,14 @@
-
-<<<<<<< HEAD
 $(document).ready(function(){
 $(".btn-default").click(function(){
    $("#sec01but02").toggleClass("btn-info");
    $("#sec01but01").toggleClass("btn-info");
- 
 });
-=======
+
 var step1 = {
+  myLocation: {
+    log: null,
+    lat: null
+  },
   init: function(){
     
   }
@@ -48,7 +49,6 @@ var step3 = {
 
   }
 }
->>>>>>> 669d4998eeb49ae0739c01551d6c807c881381f4
 
 
 });
