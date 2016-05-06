@@ -2,7 +2,7 @@ from flask import Flask, request
 import json
 
 from poi.poi_calculator import get_pois
-from route.routes_calculator import calculate_routes
+#from route.routes_calculator import calculate_routes
 from route.route import Route
 
 app = Flask(__name__)
