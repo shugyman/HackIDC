@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
   app.init();
 });
@@ -38,6 +36,7 @@ var step1 = {
 
   },
   tryToGetLocation: function(){
+    var temp = step1.getMyLocation();
     // TODO
     //return true if successful
     //update log and lat
@@ -55,7 +54,29 @@ var step1 = {
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+  },
+  getMyLocation: function(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(utilFunc, errorFunc);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+    function errorFunc(error){
+      console.log("no location");
+      console.log(error.code);
+      // error.code can be:
+      //   0: unknown error
+      //   1: permission denied
+      //   2: position unavailable (error response from location provider)
+      //   3: timed out
+    }
+    function utilFunc(position){
+      step1.myLocation.lat = position.coords.latitude; 
+      step1.myLocation.lon = position.coords.longitude;
+      console.log(step1.myLocation);
+    }
   }
+
 }
 
 var step2 = {
@@ -114,33 +135,11 @@ var step3 = {
   }
 };
 
-
-var x = document.getElementById("error");
-  function getLocation() {
-    $("#loc").show();
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-  }
-  function showPosition(position) {
-    var lat = position.coords.latitude; 
-    var lon = position.coords.longitude;
-    var latlon = 2.2 + "," + 35;
-
-    var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
-    +latlon+"&zoom=14&size=400x300&sensor=false";
-    document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
-
-}
   function getDistance() {
     $("#loc2").show();
     var x = rangeSlider.getData();
     $("#test").text("selected : " + x);
   }
-
-
 
 window.onload = function(){
   rangeSlider.init();
