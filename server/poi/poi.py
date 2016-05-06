@@ -6,3 +6,12 @@ class POI:
         self.lon = lon
         self.lat = lat
         self.yapq_grade = yapq_grade
+
+    def __hash__(self):
+        return self.geoname_id
+
+    def __eq__(self, other):
+        return self.geoname_id == other.geoname_id
+
+    def __str__(self):
+        return str(self.geoname_id)
