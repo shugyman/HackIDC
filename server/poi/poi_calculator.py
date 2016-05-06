@@ -1,3 +1,4 @@
+import uuid
 from poi import POI
 from cache import POICache
 from keys import AMADEUS_KEY
@@ -27,6 +28,9 @@ def get_pois(latitude, longitude, rad):
 
 def parse_poi_dict(poi):
     geoname_id = poi.get('geoname_id', "N/A")
+    if geoname_id == 0:
+        # Generate rather short id for aesthetic purposes
+        geoname_id = int(str(uuid.uuid4().fields[-1])[:5])
     title = poi.get('title', "N/A")
     location = poi.get('location')
     lat = location.get('latitude') if location else "N/A"
