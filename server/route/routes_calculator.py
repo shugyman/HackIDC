@@ -4,6 +4,7 @@ from itertools import permutations
 from route import Route
 from poi.cache import POICache
 from google_api import get_route
+import uuid
 
 
 def calculate_routes(lat, lon, pois, max_dist):
@@ -23,7 +24,7 @@ def calculate_routes(lat, lon, pois, max_dist):
         if assert_google_route(route):
             final_routes.append(route)
 
-    sort_routes(final_routes)
+    sort_routes(final_routes, max_dist)
 
     return final_routes
 
@@ -49,9 +50,11 @@ def get_possible_routes(lat, lon, pois, max_dist):
     return possible_routes
 
 
-def get_google_routes(possible_routes):
-    for possible_routes in
-    return possible_routes
+def get_google_routes(lat, lon,  possible_routes):
+    routes = []
+    for route in possible_routes:
+        routes.append(Route(str(uuid.uuid4()), get_route((lat, lon), (lat, lon), [(poi.lat, poi.lon) for poi in route]), route))
+    return routes
 
 
 def assert_initial_route(lat, lon, pois, max_dist):
@@ -79,6 +82,5 @@ def calc_dis(p1, p2):
     return vincenty(p1, p2).km
 
 
-def sort_routes(routes):
-    return routes
-    # return sorted(routes, key="length")
+def sort_routes(routes, distance):
+    return sorted(routes, key = lambda route: abs(route.length_km - distance))
