@@ -1,4 +1,5 @@
 from poi import POI
+from cache import POICache
 from keys import AMADEUS_KEY
 import requests
 
