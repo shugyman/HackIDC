@@ -22,10 +22,12 @@ def get_pois(latitude, longitude, rad):
     return pois_lst
 
 def parse_poi_dict(poi):
+    geoname_id = poi.get('geoname_id', "N/A")
     title = poi.get('title', "N/A")
     location = poi.get('location')
     lat = location.get('latitude') if location else "N/A"
     lon = location.get('longitude') if location else "N/A"
     grades = poi.get('grades')
     yapq_grade = grades.get('yapq_grade') if grades else "N/A"
-    return {"title": title, "lon": lon, "lat": lat, "yapq_grade": yapq_grade}
+    return {"geoname_id": geoname_id, "title": title,
+            "lon": lon, "lat": lat, "yapq_grade": yapq_grade}
