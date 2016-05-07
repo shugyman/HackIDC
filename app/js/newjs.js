@@ -193,7 +193,7 @@ var step2 = {
 
 var step3 = {
   data: null,
-  tempData: [{"geoname_id": 6254976, "lat": 48.8582, "lon": 2.2945, "yapq_grade": 5, "title": "Eiffel Tower"}, {"geoname_id": 6269533, "lat": 48.8738, "lon": 2.295, "yapq_grade": 4.39, "title": "Arc de Triomphe"}, {"geoname_id": 6452892, "lat": 48.8867, "lon": 2.343, "yapq_grade": 4.36, "title": "Sacr\u00e9-C\u0153ur, Paris"}, {"geoname_id": 6269274, "lat": 48.853, "lon": 2.3498, "yapq_grade": 4, "title": "Notre Dame de Paris"}, {"geoname_id": 0, "lat": 48.8622, "lon": 2.3325, "yapq_grade": 3.52, "title": "Tuileries Palace"}],
+  tempData: [{"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/400px-Brandenburger_Tor_abends.jpg", "title": "Brandenburg Gate", "lon": 13.3777, "geoname_id": 6698677, "yapq_grade": 4.99, "lat": 52.5163}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Berlinermauer.jpg", "title": "Berlin Wall", "lon": 13.3769, "geoname_id": 26537, "yapq_grade": 4.63, "lat": 52.5161}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Berlin_Museumsinsel_Fernsehturm.jpg/400px-Berlin_Museumsinsel_Fernsehturm.jpg", "title": "Museum Island", "lon": 13.3956, "geoname_id": 7669158, "yapq_grade": 4.25, "lat": 52.5214}, {"main_image": "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Berliner_Fernsehturm_November_2013.jpg/640px-Berliner_Fernsehturm_November_2013.jpg", "title": "Fernsehturm Berlin", "lon": 13.4094, "geoname_id": 6325497, "yapq_grade": 4.24, "lat": 52.5208}, {"main_image": "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Reichstag_building_Berlin_view_from_west_before_sunset.jpg/280px-Reichstag_building_Berlin_view_from_west_before_sunset.jpg", "title": "Reichstag building", "lon": 13.3752, "geoname_id": 6944090, "yapq_grade": 3.74, "lat": 52.5186}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anhalter_Bahnhof_2005.jpg/400px-Anhalter_Bahnhof_2005.jpg", "title": "Berlin Anhalter Bahnhof", "lon": 13.3819, "geoname_id": 7911213, "yapq_grade": 3.19, "lat": 52.5031}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Bauakadm1.jpg/400px-Bauakadm1.jpg", "title": "Bauakademie", "lon": 13.3989, "geoname_id": 18472, "yapq_grade": 2.22, "lat": 52.5161}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Berlin_Nationaldenkmal_Kaiser_Wilhelm_mit_Schloss_1900.jpg/400px-Berlin_Nationaldenkmal_Kaiser_Wilhelm_mit_Schloss_1900.jpg", "title": "City Palace, Berlin", "lon": 13.4028, "geoname_id": 10376554, "yapq_grade": 2.16, "lat": 52.5175}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/1895_reichskanzlerpalais.jpg/400px-1895_reichskanzlerpalais.jpg", "title": "Reich Chancellery", "lon": 13.3819, "geoname_id": 14829, "yapq_grade": 2.09, "lat": 52.5117}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Berlin_Krolls_Wintergarten_c1850.jpg/400px-Berlin_Krolls_Wintergarten_c1850.jpg", "title": "Kroll Opera House", "lon": 13.3683, "geoname_id": 31488, "yapq_grade": 1.5, "lat": 52.5186}],
   
   init: function(){
     var dist = step2.distance;
@@ -245,7 +245,6 @@ var step3 = {
       div.append(e3);
       container.append(div);
     }
-    
   },
   getPhotoUrl: function(){
 
@@ -254,22 +253,26 @@ var step3 = {
 };
 
 step4 = {
+  data: null,
+  tempData: [{"length": 5.092, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 4.377, "pois": [{"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 2.45, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}, {"length": 7.938, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}]}, {"length": 7.956, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 8.341, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}],
   // ARRAY of ids of pois
   init: function(arr){
+    // recieves arr of pois
+    // send ajax to get routes
+    // put routes in data variable
+  },
+  createMap: function(){
 
+  },
+  createTable: function(){
+    
   }
 }
 
-  function getDistance() {
-    $("#loc2").show();
-    var x = rangeSlider.getData();
-    $("#test").text("selected : " + x);
-  }
 
 window.onload = function(){
   rangeSlider.init();
 }
-
 var rangeSlider = {
   s: null,
   init: function(){
