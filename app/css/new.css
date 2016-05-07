@@ -46,3 +46,10 @@
 	width: 40%;
 	height: 40%;
 }
+
+#sec01alert{
+	display: none;
+}
+#sec01alert02{
+	display: none;
+}

@@ -13,9 +13,11 @@ var app = {
       $("#googleMap").hide();
       $("#floating-panel").hide();
       $("#sec02address h2").hide();
-      $("#sec01alert").hide();
-      $(".close").click(function(){
+      $("#sec01alertclose").click(function(){
         $("#sec01alert").hide();
+      });
+      $("#sec01alertclose2").click(function(){
+        $("#sec01alert02").hide();
       });
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
@@ -102,6 +104,7 @@ var step1 = {
               map: resultsMap,
               position: results[0].geometry.location
             });
+            $(".alert").hide();
             $("#sec01alert").show();
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -116,6 +119,8 @@ var step1 = {
     }
 
     function errorFunc(error){
+      $(".alert").hide();
+      $("#sec01alert02").show();
       console.log("no location");
       console.log(error.code);
       // error.code can be:
@@ -125,6 +130,7 @@ var step1 = {
       //   3: timed out
     }
     function utilFunc(position){
+      $(".alert").hide();
       $("#sec01alert").show();
       step1.myLocation.lat = position.coords.latitude; 
       step1.myLocation.lng = position.coords.longitude;
