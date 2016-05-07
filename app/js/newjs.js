@@ -13,14 +13,25 @@ var app = {
       $("#googleMap").hide();
       $("#floating-panel").hide();
       $("#sec02address h2").hide();
+<<<<<<< HEAD
+
+      $("#step1 button").click(function(){
+      $("#googleMap").show(); 
+      $("#sec01but02").toggleClass("btn-info");
+      $("#sec01but01").toggleClass("btn-info");
+    });
+
 
       $("#s1btns button").on('click', function(){
         $("#s1btns button").removeClass("btn-info");
         $(this).addClass("btn-info");
       });
 
-      $(".close").click(function(){
+            $("#sec01alertclose").click(function(){
         $("#sec01alert").hide();
+      });
+      $("#sec01alertclose2").click(function(){
+        $("#sec01alert02").hide();
       });
     
       $("#sec01but01").click(function(){
@@ -97,6 +108,7 @@ var step1 = {
               map: resultsMap,
               position: results[0].geometry.location
             });
+            $(".alert").hide();
             $("#sec01alert").show();
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -112,6 +124,8 @@ var step1 = {
     }
 
     function errorFunc(error){
+      $(".alert").hide();
+      $("#sec01alert02").show();
       console.log("no location");
       console.log(error.code);
       // error.code can be:
@@ -122,6 +136,7 @@ var step1 = {
       step1.isLocationAvailable = false;
     }
     function utilFunc(position){
+      $(".alert").hide();
       $("#sec01alert").show();
       step1.myLocation.lat = position.coords.latitude; 
       step1.myLocation.lng = position.coords.longitude;

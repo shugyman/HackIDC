@@ -46,6 +46,15 @@
 	width: 40%;
 	height: 40%;
 }
+<<<<<<< HEAD
+
+#sec01alert{
+	display: none;
+}
+#sec01alert02{
+	display: none;
+=======
 #googleMap{
 	margin-bottom: 12px;
+>>>>>>> aeb5726d1eef4e1a754c636e33fcd5aa1b2aa78f
 }
