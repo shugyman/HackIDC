@@ -267,8 +267,22 @@ step4 = {
   },
       setMap:function(i){
         var str = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyC-0b1epnRfzvSdf4rbUmhZ482pmrW8RDs";
-
-    
+        var d = step4.tempData;
+        str += "&origin=" + d[i].pois[0].lat + "," + d[i].pois[0].lng;
+        str += "&destination=" + d[i].pois[d[i].pois.length - 1].lat + "," + d[i].pois[d[i].pois.length - 1].lng;
+        str += "&waypoints=";
+        alert(str);
+        if (d[i].pois.length > 2){
+         for (var j = 1; j < d[i].pois.length - 1; j++){
+            str += d[i].pois[j].lat;
+            str += ",";
+            str += d[i].pois[j].lng;
+            if(j < d[i].pois.length - 2)
+              str += "|";
+          }
+         str += "&mode=walking" ;
+        }
+        //&("#googleMapResult").src = "
   },
   createTable: function(){
     var d = step4.data;
