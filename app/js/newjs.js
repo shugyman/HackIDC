@@ -1,11 +1,9 @@
 
 
 
-var x = document.getElementById("loc");
+var x = document.getElementById("error");
   function getLocation() {
-    $("#button1").click(function(){
     $("#loc").show();
-   });
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -14,16 +12,12 @@ var x = document.getElementById("loc");
   }
   function showPosition(position) {
     var lat = position.coords.latitude; 
-    var lon = position.coords.longitude
-    x.innerHTML = "Latitude: " + lat + 
-    "<br>Longitude: " + lon; 
+    var lon = position.coords.longitude;
 }
   function getDistance() {
-    $("#button2").click(function(){
     $("#loc2").show();
     var x = rangeSlider.getData();
     $("#test").text("selected : " + x);
-   });
   }
 
 
