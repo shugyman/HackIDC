@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 var app = {
   init: function(){ 
+      step4.createTable();// for test
       $("#sec02but01").on('click', step2.launch);
       $("#googleMap").hide();
       $("#floating-panel").hide();
@@ -43,6 +44,10 @@ var app = {
         $("#floating-panel").show();
         $("#sec02address h2").show();
         $("#googleMap").show();
+      });
+
+      $("#step4 .btn-info").click(function(){
+        step4.createMap();
       });
       step1.init();
       step1.createMap();
@@ -257,6 +262,7 @@ step4 = {
   tempData: [{"length": 5.092, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 4.377, "pois": [{"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 2.45, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}, {"length": 7.938, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}]}, {"length": 7.956, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 8.341, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}],
   // ARRAY of ids of pois
   init: function(arr){
+    step4.createTable();
     // recieves arr of pois
     // send ajax to get routes
     // put routes in data variable
@@ -265,7 +271,33 @@ step4 = {
 
   },
   createTable: function(){
-    
+    var d = step4.data;
+    if(d == null){
+      d = step4.tempData;
+    }
+    var container = $("#routesContainer table");
+    for(var i = 0; i < d.length; i++){
+      var div = $('<tr></tr>');
+      var st = '<td><label><input type="checkbox" value="' + i + '" checked></label></td>';
+      var st2 = '<td>';
+      for (var j = 0; j < d[i].pois.length; j++){
+      st2 += d[i].pois[j].title;
+      console.log(d[i].pois[j].title);
+      st2 += ", ";
+      }
+      st2 += '</td>';
+      var st3 = "<td>" + d[i]["length"]+ "</td>";
+      var st4 = '<td><button id = "pic' + i + '" class="btn btn-sm btn-info">Show Map</button></td>';
+      var e = $(st);
+      var e2 = $(st2);
+      var e3 = $(st3);
+      var e4 = $(st4);
+      div.append(e);
+      div.append(e2);
+      div.append(e3);
+      div.append(e4);
+      container.append(div);
+    }
   }
 }
 
