@@ -226,7 +226,6 @@ var step3 = {
     var temp = $("#photosThead");
     container.empty();
     container.append(temp);
-    console.log(d[0].main_image);
     for(i = 0; i < d.length; i++){
       var div = $('<tr></tr>');
       var st = "";
