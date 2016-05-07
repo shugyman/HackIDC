@@ -229,27 +229,30 @@ var step3 = {
       d = step3.tempData;
     }
     var container = $("#poiContainer table");
+    var temp = $("#photosThead");
     container.empty();
+    container.append(temp);
+    console.log(d[0].main_image);
     for(i = 0; i < d.length; i++){
       var div = $('<tr></tr>');
       var st = "";
-      st+= '<td><label><input type="checkbox" value="' + i + '" checked></td><td>';
+      st+= '<td><label><input type="checkbox" value="' + d[i].id + '" checked></td><td>';
       st+= d[i].title + '</label></td>'
       var st2 = "<td>" + d[i].yapq_grade + "</td>";
-      var st3 = '<td><button id = "pic' + i + '" class="btn btn-sm btn-info">show</button></td>';
       var e = $(st);
       var e2 = $(st2);
-      var e3 = $(st3);
       div.append(e);
       div.append(e2);
-      div.append(e3);
       container.append(div);
+      step3.initImgHandler(d, i, e);
     }
   },
-  getPhotoUrl: function(){
-
-
+  initImgHandler: function(d, i, e){
+    e.on('mouseenter click', function(){
+      document.getElementById("poiImg").src = d[i].main_image;
+    });
   }
+
 };
 
 step4 = {
@@ -265,7 +268,7 @@ step4 = {
 
   },
   createTable: function(){
-    
+
   }
 }
 

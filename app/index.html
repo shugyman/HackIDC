@@ -125,21 +125,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
+
                     <h1>STEP 3</h1>
                     <p class="lead">Choose points of interest</p>                    
-                    <div id = "poiContainer" class="row well">
+                    <div id = "poiContainer" class="row">
                         <div class = "col-xs-6"><table class = "table table-hover">
-                            <thead>
+                            <thead id = "photosThead">
                             <tr>
                                 <td>CB</td>
                                 <td>Attraction</td>
                                 <td>Rating</td>
-                                <td>Picture</td>
                             </tr>
                             </thead>
                         </table></div>
-                        <div class="col-xs-6" id="pic">
-                            <img>display photos here<br><center>@@@@</center>
+
+                        <div class="col-xs-6 text-center" id="pic">
+                            <center><img id = "poiImg"></center>
                         </div>
                     </div>
                     <button id = "sec01but01" class="btn btn-lg btn-default" onclick="getLocation()">DONE</button>

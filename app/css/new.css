@@ -59,3 +59,9 @@
 thead *{
 	font-weight: bold;
 }
+#poiImg{
+	transform: scale(2,2);
+	transform-origin: 0 0;
+	left: -80px;
+	position: relative;
+}
