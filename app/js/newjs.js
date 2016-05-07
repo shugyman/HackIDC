@@ -1,10 +1,54 @@
 
+<<<<<<< HEAD
 $(document).ready(function(){
 $(".btn-default").click(function(){
    $("#sec01but02").toggleClass("btn-info");
    $("#sec01but01").toggleClass("btn-info");
  
 });
+=======
+var step1 = {
+  init: function(){
+    
+  }
+}
+
+var step2 = {
+  distance: {
+    min: null,
+    max: null
+  }
+  location: {
+    log: null,
+    lat: null
+  },
+  init: function(log, lat){
+    this.location.log = log;
+    this.location.lat = lat;
+  }
+
+  getData: function(){
+    var temp = rangeSlider.getData();
+    this.distance.min = temp[0];
+    this.distance.max = temp[1];
+    return (this.distance.min > 0 && this.distance.max > 0);
+  }
+
+  launch: function(){
+    if(step2.getData()){
+      step3.init();
+    } else {
+      console.log("error in step2");
+    }
+  }
+}
+
+var step3 = {
+  init: function(){
+
+  }
+}
+>>>>>>> 669d4998eeb49ae0739c01551d6c807c881381f4
 
 
 });
@@ -38,7 +82,6 @@ var x = document.getElementById("error");
 
 window.onload = function(){
   rangeSlider.init();
-  rangeSlider.getData();
 }
 
 var rangeSlider = {
@@ -48,7 +91,6 @@ var rangeSlider = {
   },
   getData: function(){
     var value = rangeSlider.s.slider('getValue')
-    console.log(value);
     return value;
   }
 }
