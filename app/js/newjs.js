@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 
 var app = {
-  init: function(){
+  init: function(){ 
       $("#sec02but01").on('click', step2.launch);
       $("#googleMap").hide();
       $("#floating-panel").hide();
@@ -20,6 +20,9 @@ var app = {
         console.log(this);
       });
 
+      $(".close").click(function(){
+        $("#sec01alert").hide();
+      });
     
       $("#sec01but01").click(function(){
         $("#floating-panel").hide();
@@ -65,7 +68,7 @@ var step1 = {
     function initialize() {
       var mapProp = {
         center:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
-        zoom:5,
+        zoom:10,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
@@ -75,7 +78,6 @@ var step1 = {
 
         marker.setMap(map);
          var geocoder = new google.maps.Geocoder();
-         
 
         document.getElementById('submit').addEventListener('click', function() {
           step1.geocodeAddress(geocoder, map);
@@ -96,6 +98,7 @@ var step1 = {
               map: resultsMap,
               position: results[0].geometry.location
             });
+            $("#sec01alert").show();
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
@@ -120,6 +123,7 @@ var step1 = {
       step1.isLocationAvailable = false;
     }
     function utilFunc(position){
+      $("#sec01alert").show();
       step1.myLocation.lat = position.coords.latitude; 
       step1.myLocation.lng = position.coords.longitude;
       step1.choiseLocation.lat = position.coords.latitude; 
