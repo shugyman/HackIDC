@@ -55,7 +55,9 @@
 }
 #googleMap{
 	margin-bottom: 12px;
+	display: none;
 }
+
 #step4 h4{
 	text-align: center;
 }
