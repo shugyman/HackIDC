@@ -222,7 +222,7 @@ var step3 = {
     }
   };
 
-  var url = "http://localhost:8080/GetPOI?lat=" + loc.lat + "&lon=" + loc.log + "&rad=" + dist.max/2;
+  var url = "http://" + location.hostname + ":8080/GetPOI?lat=" + loc.lat + "&lon=" + loc.log + "&rad=" + dist.max/2;
   console.log(url);
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -285,7 +285,7 @@ step4 = {
 
     var lat = step1.choiseLocation.lat;
     var lon = step1.choiseLocation.lng;
-    var url = "http://localhost:8080/GetRoutes?lat=" + lat + "&lon=" + lon + "&distance=" + step2.distance.max/2 +"&pois=[" ;
+    var url = "http://" + location.hostname + ":8080/GetRoutes?lat=" + lat + "&lon=" + lon + "&distance=" + step2.distance.max/2 +"&pois=[" ;
     for(i = 0; i < arr.length; i++){
       url+= arr[i];
       url+= (i != arr.length - 1) ? "," : "]";
