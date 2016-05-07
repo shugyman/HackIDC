@@ -1,7 +1,7 @@
 $(document).ready(function(){
   app.init();  
   //TEMPORARY:
-  step3.init();
+  //step3.init();
 });
 
 
@@ -43,6 +43,9 @@ var app = {
         $("#sec02address h2").show();
         $("#googleMap").show();
       });
+
+      $("#sec03but01").on('click', step3.launch);
+
       step1.init();
       step1.createMap();
       step4.init();// for testing
@@ -162,7 +165,7 @@ var step1 = {
       step1.myLocation.lng = position.coords.longitude;
       step1.choiseLocation.lat = position.coords.latitude; 
       step1.choiseLocation.lng = position.coords.longitude;
-      step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
+      step2.init(step1.choiseLocation.lng, step1.choiseLocation.lat);
       step1.isLocationAvailable = true;
       step1.setMap();
     }
@@ -204,31 +207,23 @@ var step2 = {
 var step3 = {
   data: null,
   map:null,
-  tempData: [{"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/400px-Brandenburger_Tor_abends.jpg", "title": "Brandenburg Gate", "lon": 13.3777, "geoname_id": 6698677, "yapq_grade": 4.99, "lat": 52.5163}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Berlinermauer.jpg", "title": "Berlin Wall", "lon": 13.3769, "geoname_id": 26537, "yapq_grade": 4.63, "lat": 52.5161}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Berlin_Museumsinsel_Fernsehturm.jpg/400px-Berlin_Museumsinsel_Fernsehturm.jpg", "title": "Museum Island", "lon": 13.3956, "geoname_id": 7669158, "yapq_grade": 4.25, "lat": 52.5214}, {"main_image": "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Berliner_Fernsehturm_November_2013.jpg/640px-Berliner_Fernsehturm_November_2013.jpg", "title": "Fernsehturm Berlin", "lon": 13.4094, "geoname_id": 6325497, "yapq_grade": 4.24, "lat": 52.5208}, {"main_image": "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Reichstag_building_Berlin_view_from_west_before_sunset.jpg/280px-Reichstag_building_Berlin_view_from_west_before_sunset.jpg", "title": "Reichstag building", "lon": 13.3752, "geoname_id": 6944090, "yapq_grade": 3.74, "lat": 52.5186}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anhalter_Bahnhof_2005.jpg/400px-Anhalter_Bahnhof_2005.jpg", "title": "Berlin Anhalter Bahnhof", "lon": 13.3819, "geoname_id": 7911213, "yapq_grade": 3.19, "lat": 52.5031}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Bauakadm1.jpg/400px-Bauakadm1.jpg", "title": "Bauakademie", "lon": 13.3989, "geoname_id": 18472, "yapq_grade": 2.22, "lat": 52.5161}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Berlin_Nationaldenkmal_Kaiser_Wilhelm_mit_Schloss_1900.jpg/400px-Berlin_Nationaldenkmal_Kaiser_Wilhelm_mit_Schloss_1900.jpg", "title": "City Palace, Berlin", "lon": 13.4028, "geoname_id": 10376554, "yapq_grade": 2.16, "lat": 52.5175}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/1895_reichskanzlerpalais.jpg/400px-1895_reichskanzlerpalais.jpg", "title": "Reich Chancellery", "lon": 13.3819, "geoname_id": 14829, "yapq_grade": 2.09, "lat": 52.5117}, {"main_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Berlin_Krolls_Wintergarten_c1850.jpg/400px-Berlin_Krolls_Wintergarten_c1850.jpg", "title": "Kroll Opera House", "lon": 13.3683, "geoname_id": 31488, "yapq_grade": 1.5, "lat": 52.5186}],
-  
+
   init: function(){
     var dist = step2.distance;
     var loc = step2.location;
     console.log("step3 inititialized");
     console.log(dist, loc);
-    if(true){ // FOR DEMO PURPOSES
-      console.log(this.tempData);
-      step3.createStep();
-      return ;
-    }
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-     step3.data = xhttp.responseText;
+     step3.data = JSON.parse(xhttp.responseText);
      console.log(step3.data);
+     step3.createStep();
     }
-    step3.createStep();
   };
 
-  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5  32.0630685,34.7622803 41.390938, 2.160443
-  var lat = 41.390938;
-  var lon = 2.160443;
-  var url = "http://localhost:8080/GetPOI?lat=" + lat + "&lon=" + lon + "&rad=" + 5;
+  var url = "http://localhost:8080/GetPOI?lat=" + loc.lat + "&lon=" + loc.log + "&rad=" + dist.max/2;
   console.log(url);
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -236,9 +231,6 @@ var step3 = {
 
   createStep: function(){
     var d = step3.data;
-    if(d == null){
-      d = step3.tempData;
-    }
     var container = $("#poiContainer table");
     var temp = $("#photosThead");
     container.empty();
@@ -247,7 +239,7 @@ var step3 = {
     for(i = 0; i < d.length; i++){
       var div = $('<tr></tr>');
       var st = "";
-      st+= '<td><label><input type="checkbox" value="' + d[i].id + '" checked></td><td>';
+      st+= '<td><label><input type="checkbox" id="cba' + i + '" checked></td><td>';
       st+= d[i].title + '</label></td>'
       var st2 = "<td>" + d[i].yapq_grade + "</td>";
       var e = $(st);
@@ -262,7 +254,18 @@ var step3 = {
     e.on('mouseenter click', function(){
       document.getElementById("poiImg").src = d[i].main_image;
     });
-  }
+  },
+  launch: function(){
+    var selected = new Array();
+    for(var i = 0; i < step3.data.length; i++){
+      var a = document.getElementById('cba' + i);
+      if(a.checked){
+        selected.push(step3.data[i].geoname_id);
+      }
+    }
+    console.log(selected);
+    step4.launch(selected);
+  },
 
 };
 
@@ -274,6 +277,7 @@ step4 = {
     step4.createTable();
     // send ajax to get routes
     // put routes in data variable
+
   },
       setMap:function(i){
         var key = "AIzaSyDfVoMuakzyG9Pw2xmKfM4XgUZkLulvOm8";
