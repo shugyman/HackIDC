@@ -32,19 +32,23 @@ var app = {
     $('#getStarted').on('click', function(){
       step1.init();
     });
-
+    step1.getMyLocation();
     step1.createMap();
   }
 }
 
 var step1 = {
   myLocation: {
-    lng: null,
-    lat: null
+    lng: 0,
+    lat: 0
   },
   otherLocation: {
     lng: null,
     lat: null
+  },
+  choiseLocation: {
+    lng: 0,
+    lat: 0
   },
   isLocationAvailable: false,
 
@@ -63,17 +67,18 @@ var step1 = {
   createMap: function(){
     function initialize() {
       var mapProp = {
-        center:new google.maps.LatLng(step1.myLocation.lng, step1.myLocation.lat),
+        center:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         zoom:5,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
       var marker=new google.maps.Marker({
-        position:new google.maps.LatLng(step1.myLocation.lng, step1.myLocation.lat),
+        position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
 
         marker.setMap(map);
          var geocoder = new google.maps.Geocoder();
+         
 
         document.getElementById('submit').addEventListener('click', function() {
           step1.geocodeAddress(geocoder, map);
@@ -88,6 +93,8 @@ var step1 = {
             resultsMap.setCenter(results[0].geometry.location);
             step1.otherLocation.lat = results[0].geometry.location.lat();
             step1.otherLocation.lng = results[0].geometry.location.lng();
+            step1.choiseLocation.lat = results[0].geometry.location.lat();
+            step1.choiseLocation.lng = results[0].geometry.location.lng();
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
@@ -103,6 +110,7 @@ var step1 = {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+
     function errorFunc(error){
       console.log("no location");
       console.log(error.code);
@@ -114,9 +122,9 @@ var step1 = {
     }
     function utilFunc(position){
       step1.myLocation.lat = position.coords.latitude; 
-      step1.myLocation.lon = position.coords.longitude;
-      alert(step1.myLocation.lat + " " + step1.myLocation.lon);
-      console.log(step1.myLocation);
+      step1.myLocation.lng = position.coords.longitude;
+      step1.choiseLocation.lat = position.coords.latitude; 
+      step1.choiseLocation.lng = position.coords.longitude;
     }
   }
 
