@@ -1,5 +1,6 @@
 from flask import Flask, request
 import json
+import math
 
 from poi.poi_calculator import get_pois
 from route.routes_calculator import calculate_routes
@@ -17,7 +18,7 @@ def hello_world():
 def get_poi():
     lon = request.args.get("lon")
     lat = request.args.get("lat")
-    rad = request.args.get("rad")
+    rad = int(math.ceil(float(request.args.get("rad"))))
     return json.dumps([poi.__dict__ for poi in get_pois(lat, lon, rad)])
 
 
