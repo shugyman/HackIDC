@@ -3,7 +3,18 @@
 	display:none;
 	margin: 10px;
 }
-#button{
 
+#loc2{
+	color: green; 
+	display:none;
 	margin: 10px;
+}
+.btn-default{
+
+	margin: 30px;
+}
+
+#test{
+	font-size: 30px; 
+	
 }
