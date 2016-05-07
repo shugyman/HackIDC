@@ -1,3 +1,10 @@
+$(document).ready(function(){
+ 
+  $("#loc").hide();
+
+});
+
+
 var x = document.getElementById("loc");
   function getLocation() {
     $("#button").click(function(){
