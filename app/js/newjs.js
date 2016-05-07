@@ -185,9 +185,12 @@ var step3 = {
     step3.createStep();
   };
 
-  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5
-  var url = "<<<PORT>>>/GetPOI?lat=" + lat + "&lon=" + lon + "&rad=" + rad;
-  xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
+  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5  32.0630685,34.7622803 41.390938, 2.160443
+  var lat = 41.390938;
+  var lon = 2.160443;
+  var url = "http://localhost:8080/GetPOI?lat=" + lat + "&lon=" + lon + "&rad=" + 5;
+  console.log(url);
+  xhttp.open("GET", url, true);
   xhttp.send();
   },
 
