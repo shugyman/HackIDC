@@ -17,7 +17,6 @@ var app = {
       $("#s1btns button").on('click', function(){
         $("#s1btns button").removeClass("btn-info");
         $(this).addClass("btn-info");
-        console.log(this);
       });
 
       $(".close").click(function(){
