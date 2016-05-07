@@ -19,6 +19,7 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -65,9 +66,11 @@
                     <h1>STEP 1</h1>
                     <hr class="small">
                     <p class="lead">Choose location</p>
-                    <button id = "sec01but01" class="btn btn-default" onclick="getLocation()">My location</button>
-                    <button id = "sec01but02" class="btn btn-default btn-info" onclick="getLocation()">Other location</button>
-
+                    <button id = "sec01but01" class="btn btn-default btn-info" onclick="getLocation()">My location</button>
+                    <button id = "sec01but02" class="btn btn-default" onclick="getLocation()">Other location</button>
+                    <div class="row">
+                        <div id="mapholder"></div>
+                    </div>
                     <div class="row">
                         <p id = "error"></p>   
                         <span id="loc" class="glyphicon glyphicon-ok"></span>
@@ -175,13 +178,13 @@
         </div>
     </footer>
 
-    <script src="js/newjs.js"></script>
+ 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+   <script src="js/newjs.js"></script>
     <!-- Custom Theme JavaScript -->
     <script>
     // Closes the sidebar menu
