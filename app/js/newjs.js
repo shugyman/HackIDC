@@ -48,7 +48,7 @@ var app = {
 
       step1.init();
       step1.createMap();
-      step4.init();// for testing
+      //step4.init();// for testing
   }
 }
 
@@ -222,7 +222,7 @@ var step3 = {
     }
   };
 
-  var url = "http://localhost:8080/GetPOI?lat=" + loc.lat + "&lon=" + loc.log + "&rad=" + dist.max/2;
+  var url = "http://localhost:8080/GetPOI?lat=" + loc.log + "&lon=" + loc.lat + "&rad=" + dist.max/2;
   console.log(url);
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -262,7 +262,7 @@ var step3 = {
       }
     }
     console.log(selected);
-    step4.launch(selected);
+    step4.init(selected);
   },
 
 };
@@ -271,21 +271,30 @@ step4 = {
   data: null,
   tempData: [{"length": 5.092, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 4.377, "pois": [{"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 2.45, "pois": [{"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}, {"length": 7.938, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}]}, {"length": 7.956, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 7669158, "lat": 52.5214, "lon": 13.3956, "yapq_grade": 4.25, "title": "Museum Island"}]}, {"length": 8.341, "pois": [{"geoname_id": 6325497, "lat": 52.5208, "lon": 13.4094, "yapq_grade": 4.24, "title": "Fernsehturm Berlin"}, {"geoname_id": 6698677, "lat": 52.5163, "lon": 13.3777, "yapq_grade": 4.99, "title": "Brandenburg Gate"}]}],
   // ARRAY of ids of pois
+
   init: function(arr){
-    step4.createTable();
+    console.log("step4 inited");
      var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-     step4.data = xhttp.responseText;
+      step4.data = JSON.parse(xhttp.responseText);
+      step4.createTable();
+      console.log(step4.data);
      }
     };
 
-  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5  32.0630685,34.7622803 41.390938, 2.160443
     var lat = step1.choiseLocation.lat;
     var lon = step1.choiseLocation.lng;
-    var url = "http://localhost:8080/GetRoutes?lat=" + lat + "&lon=" + lon + "&distance=" + step2.distance.max/2 +"&pois=" ;
+    var url = "http://localhost:8080/GetRoutes?lat=" + lat + "&lon=" + lon + "&distance=" + step2.distance.max/2 +"&pois=[" ;
+    for(i = 0; i < arr.length; i++){
+      url+= arr[i];
+      url+= (i != arr.length - 1) ? "," : "]";
+    }
+    //http://10.10.17.162:8080/GetRoutes?lat=48.854885&lon=2.295627&distance=15&pois=[6452892,6269274,6269533,6254976]
+
     xhttp.open("GET", url, true);
     xhttp.send();
+      
     },
       setMap:function(i){
         var key = "AIzaSyDfVoMuakzyG9Pw2xmKfM4XgUZkLulvOm8";
