@@ -13,32 +13,41 @@ var app = {
       $("#googleMap").hide();
       $("#floating-panel").hide();
       $("#sec02address h2").hide();
-      $("#sec01alertclose").click(function(){
-        $("#sec01alert").hide();
-      });
-      $("#sec01alertclose2").click(function(){
-        $("#sec01alert02").hide();
-      });
+<<<<<<< HEAD
+
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
       $("#sec01but02").toggleClass("btn-info");
       $("#sec01but01").toggleClass("btn-info");
     });
-      $("#sec01but01").click(function(){
-      $("#floating-panel").hide();
-      $("#sec02address h2").hide();
-      step1.getMyLocation();
-      step1.createMap();
-    });
-      $("#sec01but02").click(function(){
-      $("#floating-panel").show();
-      $("#sec02address h2").show();
-    });
 
-    $('#getStarted').on('click', function(){
+
+      $("#s1btns button").on('click', function(){
+        $("#s1btns button").removeClass("btn-info");
+        $(this).addClass("btn-info");
+        console.log(this);
+      });
+
+            $("#sec01alertclose").click(function(){
+        $("#sec01alert").hide();
+      });
+      $("#sec01alertclose2").click(function(){
+        $("#sec01alert02").hide();
+      });
+    
+      $("#sec01but01").click(function(){
+        $("#floating-panel").hide();
+        $("#sec02address h2").hide();
+        step1.getMyLocation();
+        step1.createMap();
+      });
+
+      $("#sec01but02").on('click', function(){
+        $("#floating-panel").show();
+        $("#sec02address h2").show();
+        $("#googleMap").show();
+      });
       step1.init();
-    });
-    step1.getMyLocation();
     step1.createMap();
   }
 }
@@ -60,12 +69,8 @@ var step1 = {
 
   init: function(){
     console.log('step1 inititialized');
-    step1.isLocationAvailable = step1.tryToGetLocation();
+    step1.getMyLocation();
 
-  },
-  tryToGetLocation: function(){
-    var found = step1.getMyLocation();
-    return found;
   },
   otherLocationClicked: function(){
     
@@ -116,6 +121,7 @@ var step1 = {
       navigator.geolocation.getCurrentPosition(utilFunc, errorFunc);
     } else {
       console.log("Geolocation is not supported by this browser.");
+      step1.isLocationAvailable = false;
     }
 
     function errorFunc(error){
@@ -128,6 +134,7 @@ var step1 = {
       //   1: permission denied
       //   2: position unavailable (error response from location provider)
       //   3: timed out
+      step1.isLocationAvailable = false;
     }
     function utilFunc(position){
       $(".alert").hide();
@@ -136,6 +143,7 @@ var step1 = {
       step1.myLocation.lng = position.coords.longitude;
       step1.choiseLocation.lat = position.coords.latitude; 
       step1.choiseLocation.lng = position.coords.longitude;
+      step1.isLocationAvailable = true;
     }
   }
 
