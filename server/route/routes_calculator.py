@@ -18,13 +18,17 @@ def calculate_routes(lat, lon, pois, max_dist):
     # Get the routes as a google route.
     google_routes = get_google_routes(lat, lon, possible_routes)
 
-    # Final filter the google routes.
-    final_routes = []
-    for route in google_routes:
-        if assert_google_route(route):
-            final_routes.append(route)
+    final_routes = sort_routes(google_routes, max_dist)
 
-    final_routes = sort_routes(final_routes, max_dist)
+    # filter bad ranked routes, leave at least 5.
+    max_i = None
+    for idx, route in enumerate(final_routes):
+        if route.rank(max_dist) >= 3 and idx > 5:
+            max_i = idx
+            break
+
+    if max_i:
+        final_routes = final_routes[:max_i]
 
     return final_routes
 
@@ -85,4 +89,4 @@ def calc_dis(p1, p2):
 
 
 def sort_routes(routes, distance):
-    return sorted(routes, key = lambda route: abs(route.length_km - distance))
+    return sorted(routes, key = lambda route: route.rank(distance))
