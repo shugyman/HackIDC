@@ -21,6 +21,7 @@ var app = {
       $("#sec01but01").click(function(){
       $("#floating-panel").hide();
       $("#sec02address h2").hide();
+      step1.getMyLocation();
       step1.createMap();
     });
       $("#sec01but02").click(function(){
@@ -53,10 +54,8 @@ var step1 = {
 
   },
   tryToGetLocation: function(){
-    var temp = step1.getMyLocation();
-    // TODO
-    //return true if successful
-    //update log and lat
+    var found = step1.getMyLocation();
+    return found;
   },
   otherLocationClicked: function(){
     
@@ -116,6 +115,9 @@ var step1 = {
     function utilFunc(position){
       step1.myLocation.lat = position.coords.latitude; 
       step1.myLocation.lng = position.coords.longitude;
+      if (step1.myLocation.lat == null && step1.myLocation.lng == null)
+        return false;
+      return true;
     }
   }
 
