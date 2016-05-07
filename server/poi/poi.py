@@ -1,11 +1,13 @@
 class POI:
     def __init__(self, geoname_id= None, title=None,
-                 lon=None, lat=None, yapq_grade=None):
+                 lon=None, lat=None, yapq_grade=None,
+                 main_image=None):
         self.geoname_id = geoname_id
         self.title = title
         self.lon = lon
         self.lat = lat
         self.yapq_grade = yapq_grade
+        self.main_image = main_image
 
     def __hash__(self):
         return self.geoname_id
