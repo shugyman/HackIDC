@@ -44,7 +44,7 @@ def get_possible_routes(lat, lon, pois, max_dist):
     # That's why I store it in sets.
 
     possible_routes = []
-    for i in xrange(1, len(pois) + 1):
+    for i in xrange(1, min(len(pois) + 1, 4)):
         for permu in permutations(pois, i):
             if assert_initial_route(lat, lon, permu, max_dist):
                 permu_set = set(permu)
