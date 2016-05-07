@@ -17,8 +17,6 @@ var app = {
 
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
-      $("#sec01but02").toggleClass("btn-info");
-      $("#sec01but01").toggleClass("btn-info");
     });
 
 
