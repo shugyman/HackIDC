@@ -13,7 +13,7 @@ var app = {
       $("#googleMap").hide();
       $("#floating-panel").hide();
       $("#sec02address h2").hide();
-<<<<<<< HEAD
+
 
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
