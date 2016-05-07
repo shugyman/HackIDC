@@ -1,15 +1,30 @@
 
 
 $(document).ready(function(){
-  app.init();
+  app.init();  
 });
+
+function getLocation() {
+  console.log("2"); 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+  function showPosition(position) { 
+   console.log(position.coords.latitude);     
+}   
+
+
 
 
 var app = {
   init: function(){
-    $("#sec02but01").on('click', step2.launch);
-    
-    $("#step1 button").click(function(){
+      $("#sec02but01").on('click', step2.launch);
+      $("#googleMap").hide();
+      $("#step1 button").click(function(){
+      $("#googleMap").show(); 
       $("#sec01but02").toggleClass("btn-info");
       $("#sec01but01").toggleClass("btn-info");
     });
@@ -17,7 +32,10 @@ var app = {
     $('#getStarted').on('click', function(){
       step1.init();
     });
-    step1.createMap();
+    getLocation();
+    var x = 2;
+    var y = 3;
+    step1.createMap(x,y);
   }
 }
 
@@ -45,10 +63,10 @@ var step1 = {
   otherLocationClicked: function(){
     
   },
-  createMap: function(){
+  createMap: function(x,y){
     function initialize() {
       var mapProp = {
-        center:new google.maps.LatLng(51.508742,-0.120850),
+        center:new google.maps.LatLng(x,y),
         zoom:5,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
