@@ -18,3 +18,16 @@
 	font-size: 30px; 
 	
 }
+#sec02address{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+#googleMap{
+	width:500px;
+	height:380px;
+}
+
+.row h2{
+	text-align: center;
+}
+
