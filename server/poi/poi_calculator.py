@@ -13,7 +13,7 @@ def get_pois(latitude, longitude, rad):
     "longitude": longitude,
     "radius": rad,
     "category": "landmark",
-    "number_of_images": 0,
+    "number_of_images": 1,
     }
     r = requests.get(yapq_url, params=payload)
     if r.status_code == 200:
@@ -37,5 +37,7 @@ def parse_poi_dict(poi):
     lon = location.get('longitude') if location else "N/A"
     grades = poi.get('grades')
     yapq_grade = grades.get('yapq_grade') if grades else "N/A"
+    main_image = poi.get('main_image')
     return {"geoname_id": geoname_id, "title": title,
-            "lon": lon, "lat": lat, "yapq_grade": yapq_grade}
+            "lon": lon, "lat": lat, "yapq_grade": yapq_grade,
+            "main_image": main_image}
