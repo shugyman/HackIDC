@@ -222,7 +222,7 @@ var step3 = {
     }
   };
 
-  var url = "http://localhost:8080/GetPOI?lat=" + loc.log + "&lon=" + loc.lat + "&rad=" + dist.max/2;
+  var url = "http://localhost:8080/GetPOI?lat=" + loc.lat + "&lon=" + loc.log + "&rad=" + dist.max/2;
   console.log(url);
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -303,11 +303,9 @@ step4 = {
         if(d == null){
            d = step4.tempData;
           }
-        console.log(i);
         str += "&origin=" + step1.choiseLocation.lat + "," + step1.choiseLocation.lng;
         str += "&destination=" + step1.choiseLocation.lat + "," + step1.choiseLocation.lng;
         str += "&waypoints=";
-        console.log(str);
         for (var j = 0; j < d[i].pois.length; j++){
           str += d[i].pois[j].lat;
           str += ",";
@@ -316,7 +314,7 @@ step4 = {
             str += "|";
         }
          str += "&mode=walking" ;
-
+        console.log(str);
         document.getElementById("googleMapResult").src = str;
 
   },
