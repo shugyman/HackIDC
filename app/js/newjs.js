@@ -267,9 +267,25 @@ step4 = {
     // put routes in data variable
   },
       setMap:function(i){
-        var str = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyC-0b1epnRfzvSdf4rbUmhZ482pmrW8RDs";
+        var key = "AIzaSyDfVoMuakzyG9Pw2xmKfM4XgUZkLulvOm8";
+        var str = "https://www.google.com/maps/embed/v1/directions?key=" + key;
+        var d = step4.tempData;
+        console.log(i);
+        str += "&origin=" + "52.507629,13.1449502";
+        str += "&destination=" + "52.507629,13.1449502";
+        str += "&waypoints=";
+        console.log(str);
+        for (var j = 0; j < d[i].pois.length; j++){
+          str += d[i].pois[j].lat;
+          str += ",";
+          str += d[i].pois[j].lon;
+          if(j != d[i].pois.length - 1)
+            str += "|";
+        }
+         str += "&mode=walking" ;
 
-    
+        document.getElementById("googleMapResult").src = str;
+
   },
   createTable: function(){
     var d = step4.data;
@@ -287,7 +303,7 @@ step4 = {
       }
       st2 += '</td>';
       var st3 = "<td>" + d[i]["length"]+ "</td>";
-      var st4 = '<td><button onclick="step4.setMap()" id = "pic' + i + '" class="btn btn-sm btn-info">Show Map</button></td>';
+      var st4 = '<td><button onclick="step4.setMap(' + i + ')" id = "pic' + i + '" class="btn btn-sm btn-info">Show Map</button></td>';
       var e = $(st);
       var e2 = $(st2);
       var e3 = $(st3);
