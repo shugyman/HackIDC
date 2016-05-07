@@ -22,3 +22,14 @@ class Route(object):
 
     def get_metadata(self):
         return {"length": self.length_km, "pois": [poi.__dict__ for poi in self.pois]}
+
+    def rank(self, max_distance):
+        return self.distance_rank(max_distance) + self.poi_rank()
+
+    def distance_rank(self, max_distance):
+        return abs(self.length_km - max_distance)
+
+    def poi_rank(self):
+        max_rank = max([poi.yapq_grade for poi in self.pois])
+        rank = 5 - max_rank
+        return rank
