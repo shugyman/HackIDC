@@ -17,8 +17,6 @@ var app = {
 
       $("#step1 button").click(function(){
       $("#googleMap").show(); 
-      $("#sec01but02").toggleClass("btn-info");
-      $("#sec01but01").toggleClass("btn-info");
     });
 
 
@@ -116,6 +114,7 @@ var step1 = {
             step1.otherLocation.lng = results[0].geometry.location.lng();
             step1.choiseLocation.lat = results[0].geometry.location.lat();
             step1.choiseLocation.lng = results[0].geometry.location.lng();
+            step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
             var marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
@@ -154,6 +153,7 @@ var step1 = {
       step1.myLocation.lng = position.coords.longitude;
       step1.choiseLocation.lat = position.coords.latitude; 
       step1.choiseLocation.lng = position.coords.longitude;
+      step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
       step1.isLocationAvailable = true;
     }
   }
@@ -170,9 +170,9 @@ var step2 = {
     lat: null
   },
   init: function(log, lat){
-    console.log('step 2 inititialized');
     this.location.log = log;
     this.location.lat = lat;
+    console.log('step 2 inititialized' + this.location.log + " " + this.location.lat);
   },
   getData: function(){
     var temp = rangeSlider.getData();
@@ -193,9 +193,13 @@ var step2 = {
 
 var step3 = {
   data: null,
-  
   tempData: [{"geoname_id": 6254976, "lat": 48.8582, "lon": 2.2945, "yapq_grade": 5, "title": "Eiffel Tower"}, {"geoname_id": 6269533, "lat": 48.8738, "lon": 2.295, "yapq_grade": 4.39, "title": "Arc de Triomphe"}, {"geoname_id": 6452892, "lat": 48.8867, "lon": 2.343, "yapq_grade": 4.36, "title": "Sacr\u00e9-C\u0153ur, Paris"}, {"geoname_id": 6269274, "lat": 48.853, "lon": 2.3498, "yapq_grade": 4, "title": "Notre Dame de Paris"}, {"geoname_id": 0, "lat": 48.8622, "lon": 2.3325, "yapq_grade": 3.52, "title": "Tuileries Palace"}],
+  
   init: function(){
+    var dist = step2.distance;
+    var loc = step2.location;
+    console.log("step3 inititialized");
+    console.log(dist, loc);
     if(true){ // FOR DEMO PURPOSES
       console.log(this.tempData);
       step3.createStep();
@@ -225,7 +229,7 @@ var step3 = {
       d = step3.tempData;
     }
     var container = $("#poiContainer table");
-
+    container.empty();
     for(i = 0; i < d.length; i++){
       var div = $('<tr></tr>');
       var st = "";
