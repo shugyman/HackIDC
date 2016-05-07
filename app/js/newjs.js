@@ -82,11 +82,14 @@ var step1 = {
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
       step1.map = map;
-      var marker=new google.maps.Marker({
+      if (step1.marker != null){
+        step1.marker.setMap(null);
+      }
+      step1.marker =new google.maps.Marker({
         position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
 
-        marker.setMap(map);
+        step1.marker.setMap(map);
          var geocoder = new google.maps.Geocoder();
 
         document.getElementById('submit').addEventListener('click', function() {
@@ -98,11 +101,14 @@ var step1 = {
   setMap:function(){
     step1.map.setCenter(new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng));
     step1.map.setZoom(18);
-    var marker=new google.maps.Marker({
+    if (step1.marker != null){
+        step1.marker.setMap(null);
+    }
+    step1.marker=new google.maps.Marker({
         position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
 
-        marker.setMap(step1.map);
+        step1.marker.setMap(step1.map);
 
   },
   geocodeAddress: function(geocoder, resultsMap){
@@ -115,7 +121,10 @@ var step1 = {
             step1.choiseLocation.lat = results[0].geometry.location.lat();
             step1.choiseLocation.lng = results[0].geometry.location.lng();
             step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
-            var marker = new google.maps.Marker({
+             if (step1.marker != null){
+                step1.marker.setMap(null);
+              }
+            step1.marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
             });
