@@ -56,6 +56,9 @@
 #googleMap{
 	margin-bottom: 12px;
 }
+#step4 h4{
+	text-align: center;
+}
 thead *{
 	font-weight: bold;
 }

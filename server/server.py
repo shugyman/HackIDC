@@ -41,7 +41,7 @@ class TornadoServer(object):
     def _get_static_path():
         """ Get the location of the service configuration folder """
 
-        folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        folder = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app')
         return folder
 
     def start_server(self):
