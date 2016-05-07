@@ -85,11 +85,14 @@ var step1 = {
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
       step1.map = map;
-      var marker=new google.maps.Marker({
+      if (step1.marker != null){
+        step1.marker.setMap(null);
+      }
+      step1.marker =new google.maps.Marker({
         position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
 
-        marker.setMap(map);
+        step1.marker.setMap(map);
          var geocoder = new google.maps.Geocoder();
 
         document.getElementById('submit').addEventListener('click', function() {
@@ -101,11 +104,14 @@ var step1 = {
   setMap:function(){
     step1.map.setCenter(new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng));
     step1.map.setZoom(18);
-    var marker=new google.maps.Marker({
+    if (step1.marker != null){
+        step1.marker.setMap(null);
+    }
+    step1.marker=new google.maps.Marker({
         position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
 
-        marker.setMap(step1.map);
+        step1.marker.setMap(step1.map);
 
   },
   geocodeAddress: function(geocoder, resultsMap){
@@ -117,8 +123,11 @@ var step1 = {
             step1.otherLocation.lng = results[0].geometry.location.lng();
             step1.choiseLocation.lat = results[0].geometry.location.lat();
             step1.choiseLocation.lng = results[0].geometry.location.lng();
-            step2.init(step1.choiseLocation.lng, step1.choiseLocation.lat);
-            var marker = new google.maps.Marker({
+            step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
+             if (step1.marker != null){
+                step1.marker.setMap(null);
+              }
+            step1.marker = new google.maps.Marker({
               map: resultsMap,
               position: results[0].geometry.location
             });
@@ -204,7 +213,6 @@ var step3 = {
     var loc = step2.location;
     console.log("step3 inititialized");
     console.log(dist, loc);
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -265,17 +273,30 @@ step4 = {
   // ARRAY of ids of pois
   init: function(arr){
     step4.createTable();
-    // send ajax to get routes
-    // put routes in data variable
+     var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+     step4.data = xhttp.responseText;
+     }
+    };
 
-  },
+  //http://localhost:8080/GetPOI?lat=52.5186234&lon=13.3739984&rad=5  32.0630685,34.7622803 41.390938, 2.160443
+    var lat = step1.choiseLocation.lat;
+    var lon = step1.choiseLocation.lng;
+    var url = "http://localhost:8080/GetRoutes?lat=" + lat + "&lon=" + lon + "&distance=" + step2.distance.max/2 +"&pois=" ;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+    },
       setMap:function(i){
         var key = "AIzaSyDfVoMuakzyG9Pw2xmKfM4XgUZkLulvOm8";
         var str = "https://www.google.com/maps/embed/v1/directions?key=" + key;
-        var d = step4.tempData;
+        var d = step4.data;
+        if(d == null){
+           d = step4.tempData;
+          }
         console.log(i);
-        str += "&origin=" + "52.507629,13.1449502";
-        str += "&destination=" + "52.507629,13.1449502";
+        str += "&origin=" + step1.choiseLocation.lat + "," + step1.choiseLocation.lng;
+        str += "&destination=" + step1.choiseLocation.lat + "," + step1.choiseLocation.lng;
         str += "&waypoints=";
         console.log(str);
         for (var j = 0; j < d[i].pois.length; j++){
@@ -302,7 +323,8 @@ step4 = {
       var st2 = '<td>';
       for (var j = 0; j < d[i].pois.length; j++){
       st2 += d[i].pois[j].title;
-      st2 += ", ";
+      if(j != d[i].pois.length - 1)
+        st2 += ", ";
       }
       st2 += '</td>';
       var st3 = "<td>" + d[i]["length"]+ "</td>";
