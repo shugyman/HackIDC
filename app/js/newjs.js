@@ -25,7 +25,7 @@ var app = {
         $(this).addClass("btn-info");
       });
 
-            $("#sec01alertclose").click(function(){
+      $("#sec01alertclose").click(function(){
         $("#sec01alert").hide();
       });
       $("#sec01alertclose2").click(function(){
@@ -36,7 +36,7 @@ var app = {
         $("#floating-panel").hide();
         $("#sec02address h2").hide();
         step1.getMyLocation();
-        step1.createMap();
+        step1.setMap();
       });
 
       $("#sec01but02").on('click', function(){
@@ -45,7 +45,7 @@ var app = {
         $("#googleMap").show();
       });
       step1.init();
-    step1.createMap();
+      step1.createMap();
   }
 }
 
@@ -62,6 +62,7 @@ var step1 = {
     lng: 0,
     lat: 0
   },
+  map: null,
   isLocationAvailable: false,
 
   init: function(){
@@ -76,10 +77,11 @@ var step1 = {
     function initialize() {
       var mapProp = {
         center:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
-        zoom:10,
+        zoom:18,
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
       var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+      step1.map = map;
       var marker=new google.maps.Marker({
         position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
         });
@@ -92,6 +94,16 @@ var step1 = {
         });  
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+  },
+  setMap:function(){
+    step1.map.setCenter(new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng));
+    step1.map.setZoom(18);
+    var marker=new google.maps.Marker({
+        position:new google.maps.LatLng(step1.myLocation.lat, step1.myLocation.lng),
+        });
+
+        marker.setMap(step1.map);
+
   },
   geocodeAddress: function(geocoder, resultsMap){
     var address = document.getElementById('address').value;
