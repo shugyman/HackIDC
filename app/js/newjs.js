@@ -158,6 +158,7 @@ var step1 = {
       step1.choiseLocation.lng = position.coords.longitude;
       step2.init(step1.choiseLocation.lng, step1.choiseLocation.lat);
       step1.isLocationAvailable = true;
+      step1.setMap();
     }
   }
 
