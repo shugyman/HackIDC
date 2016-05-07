@@ -123,7 +123,7 @@ var step1 = {
             step1.otherLocation.lng = results[0].geometry.location.lng();
             step1.choiseLocation.lat = results[0].geometry.location.lat();
             step1.choiseLocation.lng = results[0].geometry.location.lng();
-            step2.init(step1.choiseLocation.lat, step1.choiseLocation.lng);
+            step2.init(step1.choiseLocation.lng, step1.choiseLocation.lat);
              if (step1.marker != null){
                 step1.marker.setMap(null);
               }
